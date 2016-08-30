@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1013908192197",
+    "project_id": "simansuv1"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013908192197:android:962a74cb661f4d2e",
+        "android_client_info": {
+          "package_name": "traspac.simansuv1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpNgAAtvg83f72tv20F5Uk2JLi7PbdjoA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
