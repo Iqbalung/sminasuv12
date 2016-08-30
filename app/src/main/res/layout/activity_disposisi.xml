@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eee"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="traspac.simansuv1.Disposisi">
 
     <TextView
@@ -23,10 +25,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <FrameLayout
-            android:id="@+id/contentHeader"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-            <include layout="@layout/fragment_header_surat_masuk"></include>
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:background="@color/colorSimansu"
+            >
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Disposisi"
+                android:textColor="#fff"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+
         </FrameLayout>
 
         <ScrollView
@@ -185,20 +198,18 @@
         <ImageButton
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
             android:id="@+id/btn_save"
-            android:padding="6dp"
             android:background="@drawable/selector"
             android:src="@drawable/ic_save_black_24dp"
             />
         <ImageButton
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
             android:id="@+id/btn_upload"
-            android:padding="6dp"
             android:background="@drawable/selector"
             android:src="@drawable/ic_attach_file_black_24dp"
             />

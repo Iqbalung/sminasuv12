@@ -36,7 +36,7 @@
     <RelativeLayout
         android:layout_below="@+id/list_riwayat_disposisi"
         android:layout_width="match_parent"
-        android:layout_height="260dp"
+        android:layout_height="wrap_content"
         android:padding="5dp"
         android:layout_gravity="bottom"
         android:background="#cc000000"
@@ -46,106 +46,115 @@
             android:layout_width="match_parent"
             android:gravity="right"
             android:id="@+id/btn_list"
-
             android:layout_height="wrap_content">
             <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_more_horiz_black_24dp"
+                android:layout_width="40dp"
+                android:id="@+id/btn_keterangan"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_more_horiz_black_24dp"
+                android:background="@drawable/selector"
                 />
         </RelativeLayout>
-
-        <Button
+        <LinearLayout
+            android:id="@+id/layout_keterangan"
+            android:visibility="gone"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
             android:layout_below="@+id/btn_list"
-            android:layout_width="wrap_content"
-            android:layout_margin="5dp"
-            android:id="@+id/btn_reload"
-            android:layout_height="wrap_content"
-            android:text="Reload"
-            android:textSize="14dp"
-            android:drawableLeft="@drawable/ic_refresh_black_24dp"
-            android:background="#00000000"
-            android:textColor="#fff"
-            />
-        <TextView
-            android:textSize="13dp"
-            android:layout_below="@+id/btn_reload"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:paddingLeft="8dp"
-            android:text="Keterangan"
-            android:id="@+id/ket"
-            android:layout_margin="3dp"
-            />
-        <View
-            android:layout_below="@+id/ket"
-            android:layout_above="@+id/layout1"
-            android:layout_width="match_parent"
-            android:id="@+id/garis"
-            android:layout_height="1dp"
-            android:background="#666"/>
-        <TableLayout
-            android:layout_below="@+id/garis"
-            android:paddingLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TableRow>
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="35dp"
-                    android:padding="5dp"
-                    android:src="@drawable/selector"
-                    />
-                <TextView
-                    android:layout_gravity="center|left"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="12dp"
-                    android:text="Surat Masuk Dari Entry Surat"/>
-            </TableRow>
-            <TableRow>
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="35dp"
-                    android:padding="5dp"
-                    android:src="@drawable/selector"
-                    />
-                <TextView
-                    android:layout_gravity="center|left"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="13dp"
-                    android:text="Disposisi 1"/>
-            </TableRow>
-            <TableRow>
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="35dp"
-                    android:padding="5dp"
-                    android:src="@drawable/selector"
-                    />
-                <TextView
-                    android:layout_gravity="center|left"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="13dp"
-                    android:text="Disposisi 2"/>
-            </TableRow>
-            <TableRow>
-                <ImageButton
-                    android:layout_width="30dp"
-                    android:layout_height="35dp"
-                    android:padding="5dp"
-                    android:src="@drawable/selector"
-                    />
-                <TextView
-                    android:layout_gravity="center|left"
-                    android:textColor="#fff"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="13dp"
-                    android:text="Disposisi 3"/>
-            </TableRow>
-        </TableLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_margin="5dp"
+                android:id="@+id/btn_reload"
+                android:layout_height="wrap_content"
+                android:text="Reload"
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_refresh_black_24dp"
+                android:background="#00000000"
+                android:textColor="#fff"
+                />
+            <TextView
+                android:textSize="13dp"
+                android:layout_below="@+id/btn_reload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:paddingLeft="8dp"
+                android:text="Keterangan"
+                android:id="@+id/ket"
+                android:layout_margin="3dp"
+                />
+            <View
+                android:layout_below="@+id/ket"
+                android:layout_above="@+id/layout1"
+                android:layout_width="match_parent"
+                android:id="@+id/garis"
+                android:layout_height="1dp"
+                android:background="#666"/>
+            <TableLayout
+                android:layout_below="@+id/garis"
+                android:paddingLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow>
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:padding="5dp"
+                        android:src="@drawable/selector"
+                        />
+                    <TextView
+                        android:layout_gravity="center|left"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="12dp"
+                        android:text="Surat Masuk Dari Entry Surat"/>
+                </TableRow>
+                <TableRow>
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:padding="5dp"
+                        android:src="@drawable/selector"
+                        />
+                    <TextView
+                        android:layout_gravity="center|left"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="13dp"
+                        android:text="Disposisi 1"/>
+                </TableRow>
+                <TableRow>
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:padding="5dp"
+                        android:src="@drawable/selector"
+                        />
+                    <TextView
+                        android:layout_gravity="center|left"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="13dp"
+                        android:text="Disposisi 2"/>
+                </TableRow>
+                <TableRow>
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:padding="5dp"
+                        android:src="@drawable/selector"
+                        />
+                    <TextView
+                        android:layout_gravity="center|left"
+                        android:textColor="#fff"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="13dp"
+                        android:text="Disposisi 3"/>
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

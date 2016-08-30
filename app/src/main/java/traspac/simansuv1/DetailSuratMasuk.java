@@ -136,11 +136,10 @@ public class DetailSuratMasuk extends AppCompatActivity implements View.OnClickL
     }
 
     private void showLampiran() {
-        final StringRequest request = new StringRequest(Request.Method.GET, Config.URL_GET_FILE_LAMPIRAN,
+        final StringRequest request = new StringRequest(Request.Method.GET, Config.URL_GET_FILE_LAMPIRAN+surat_id,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try {
                             JSONArray json = new JSONArray(response);
 

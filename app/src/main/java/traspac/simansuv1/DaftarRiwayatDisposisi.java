@@ -6,6 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -15,15 +18,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class DaftarRiwayatDisposisi extends AppCompatActivity
-{
+public class DaftarRiwayatDisposisi extends AppCompatActivity implements View.OnClickListener {
 
     private ListView list_riwayat_disposisi;
     private SessionManager session;
     private String surat_id,user_id,revisi_id;
     private ArrayList<RiwayatDisposisi> data_riwayat_disposisi;
     private AdapterRiwayatDisposisi adapter;
-
+    private ImageButton btn_keterangan;
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -120,6 +123,26 @@ public class DaftarRiwayatDisposisi extends AppCompatActivity
         revisi_id = intent.getStringExtra(Config.TAG_REVISI_ID);
 
         list_riwayat_disposisi = (ListView) findViewById(R.id.list_riwayat_disposisi);
+
+        btn_keterangan = (ImageButton) findViewById(R.id.btn_keterangan);
+        btn_keterangan.setOnClickListener(this);
+
+        view = (LinearLayout) findViewById(R.id.layout_keterangan);
+
     }
+
+    @Override
+    public void onClick(View v)
+    {
+        if (v == btn_keterangan) {
+            if (view.getVisibility() == View.GONE) {
+                view.setVisibility(View.VISIBLE);
+            } else {
+                view.setVisibility(View.GONE);
+            }
+
+        }
+    }
+
 
 }

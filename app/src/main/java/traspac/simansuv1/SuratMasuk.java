@@ -39,7 +39,6 @@ public class SuratMasuk {
 
     }
 
-
     public String getJenis_id() {
         return jenis_id;
     }

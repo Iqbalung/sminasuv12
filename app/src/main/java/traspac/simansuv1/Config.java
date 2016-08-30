@@ -26,13 +26,11 @@ public class Config {
     public static final String URL_LOGIN = URL_PATH+"do_login";
     public static final String URL_GET_DATA = URL_PATH+"kotak_masuk?v_userid=";
     public static final String URL_GET_BACA_SURAT = URL_PATH+"lihat_baca_surat";
-    public static final String URL_GET_FILE_LAMPIRAN = URL_PATH+"service_simansu.php?act=get_file";
+    public static final String URL_GET_FILE_LAMPIRAN = URL_PATH1+"get_file?surat_id=";
     public static final String URL_GET_TUJUAN_DISPO = "http://192.168.1.103/android/service_simansu.php?act=get_tujuan_dispo";
     public static final String URL_GET_TINDAKAN_DISPO = URL_PATH1+"get_tindakan_disposisi";
     public static final String URL_SIMPAN_DISPOSISI = URL_PATH1+"simpan_disposisi";
     public static final String URL_GET_RIWAYAT_DISPOSISI = URL_PATH+"riwayat_disposisi";
-
-
     /*public static final String URL_GET_BACA_SURAT = URL_PATH+"lihat_baca_surat";*/
 
 

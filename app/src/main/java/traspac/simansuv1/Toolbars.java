@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +37,7 @@ public class Toolbars extends Fragment implements View.OnClickListener {
 
         Bundle params = getArguments();
         if (params != null){
+            layout = R.layout.toolbar_chart;
             if (params.get("Layout") == "chart") {
                 layout = R.layout.toolbar_chart;
             }

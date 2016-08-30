@@ -1,5 +1,6 @@
 package traspac.simansuv1;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -62,13 +64,11 @@ public class MainMenu extends AppCompatActivity
 
         btnKeluar = (Button) findViewById(R.id.btnKeluar);
 
-
-
+        btnKeluar.setOnClickListener(this);
 
 
 
     }
-
 
     private void setUpFragmnet() {
         daftarsuratmasuk = new DaftarSuratMasuk();
@@ -86,12 +86,12 @@ public class MainMenu extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }*/
     }
 
     @Override
@@ -121,22 +121,40 @@ public class MainMenu extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         Fragment content = null;
-        toolbars = new Toolbars();
         Bundle bundle = new Bundle();
         String title = "";
+
+        toolbars = new Toolbars();
+        headsuratmasuk = new HeaderSuratMasuk();
+
         if (id == R.id.nav_statistic) {
+
             content = new Chart();
             title = "Statistik";
             bundle.putString("Layout","chart");
+            headsuratmasuk.setArguments(bundle);
             toolbars.setArguments(bundle);
-        }else if(id == R.id.nav_kotak_masuk) {
+
+        } else if(id == R.id.nav_kotak_masuk) {
+
             content = new DaftarSuratMasuk();
             title = "Daftar Surat Masuk";
             DaftarSuratMasuk.search = "";
+
+        } else if (id == R.id.nav_pengaturan) {
+            content = new Pengaturan();
+            title = "Pengaturan";
+            bundle.putString("Layout","pengaturan");
+            headsuratmasuk.setArguments(bundle);
+            toolbars.setArguments(bundle);
         }
+
         fragManager = getSupportFragmentManager();
         fragTransaction = fragManager.beginTransaction();
+
+        fragTransaction.replace(R.id.header_fragment,headsuratmasuk);
         fragTransaction.replace(R.id.frameToolbar,toolbars);
         fragTransaction.replace(R.id.content_fragment,content,title);
         fragTransaction.addToBackStack(null);
@@ -150,9 +168,29 @@ public class MainMenu extends AppCompatActivity
     @Override
     public void onClick(View v) {
         if (v == btnKeluar) {
-            session.clearSession();
-            finishAffinity();
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainMenu.this);
+            builder.setMessage("Keluar aplikasi ?");
+            builder.setCancelable(true);
+
+            builder.setPositiveButton(
+                    "Ya",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            session.clearSession();
+                            finishAffinity();
+                        }
+                    });
+
+            builder.setNegativeButton(
+                    "Tidak",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert = builder.create();
+            alert.show();
         }
     }
-
 }

@@ -1,6 +1,7 @@
 package traspac.simansuv1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,10 +68,13 @@ public class AdapterSuratMasuk extends ArrayAdapter<SuratMasuk>
         holder.txtSifat.setText(data.get(position).getSifat());
         holder.imgDispo.setVisibility(data.get(position).getVisible());
 
-
         convertView.setTag(holder);
         return convertView;
     }
 
+    private boolean isTooLarge (TextView text, String newText) {
+        float textWidth = text.getPaint().measureText(newText);
+        return (textWidth >= text.getMeasuredWidth ());
+    }
 
 }

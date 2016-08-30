@@ -173,6 +173,7 @@ public class DaftarSuratMasuk extends Fragment implements AdapterView.OnItemClic
         SuratMasuk data = (SuratMasuk) parent.getItemAtPosition(position);
         String[] params = {user_id,data.getSurat_id(),data.getJenis_id(),data.getRevisi_id()};
         getDetailSuratMasuk(params);
+        view.setOnClickListener(null);
 
     }
 

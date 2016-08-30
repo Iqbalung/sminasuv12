@@ -1,8 +1,9 @@
 package traspac.simansuv1;
 
-import android.support.v4.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,8 @@ public class Chart extends Fragment {
 
         BarDataSet dataset = new BarDataSet(entries, "Graphic Surat Masuk");
         //set color to colorfull bar
-        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        dataset.setColors(new int[]{Color.rgb(47, 17, 98)});
 
         ArrayList<String> labels = new ArrayList<String>();
         labels.add("January");
@@ -50,7 +51,6 @@ public class Chart extends Fragment {
 
         BarData data = new BarData(labels, dataset);
         barChart.setData(data);
-
         barChart.animateY(5000);
 
         return view;

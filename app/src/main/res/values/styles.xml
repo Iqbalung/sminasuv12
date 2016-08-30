@@ -12,7 +12,9 @@
         <item name="android:textColorSecondary">@color/colorSimansu</item>
     </style>
 
-   
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

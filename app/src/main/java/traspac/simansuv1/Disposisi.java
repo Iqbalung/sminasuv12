@@ -41,7 +41,7 @@ import java.util.Map;
 public class Disposisi extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
 
     private AutoCompleteTextView txtKepada;
-    private TextView pengirim,nosurat,jam,sifat,tanggal,idTindakan,idTujuan,txtNamaFile;
+    private TextView pengirim,nosurat,jam,sifat,tanggal,idTindakan,idTujuan,txtNamaFile,txtSizeFile;
     private String dispengirim,disnosurat,disjam,dissifat,distanggal,kepada,surat_id,remitten,isi;
     private EditText etRemitten,etIsi;
     private JSONArray result_tujuan_disposisi,result_tindakan_disposisi;
@@ -66,6 +66,7 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
         idTindakan = (TextView) findViewById(R.id.idTindakan);
         idTujuan = (TextView) findViewById(R.id.idTujuan);
         txtNamaFile = (TextView) findViewById(R.id.txtNamaFile);
+        txtSizeFile = (TextView) findViewById(R.id.txtFileSize);
         txtKepada = (AutoCompleteTextView) findViewById(R.id.etKepada);
         cboTindakan = (Spinner) findViewById(R.id.cboTindakan);
         etRemitten = (EditText) findViewById(R.id.etRemitten);
@@ -241,6 +242,8 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
         if (requestCode == 2 && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri filePath = data.getData();
             String name = "";
+            String size = "";
+            Log.d("Data",filePath.toString());
             name = filePath.getLastPathSegment();
             int ext = name.indexOf(".");
             if (ext == -1) {
@@ -250,8 +253,10 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
                 int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
                 cursor.moveToFirst();
                 name = cursor.getString(nameIndex);
+                size = cursor.getString(sizeIndex);
             }
             txtNamaFile.setText(name);
+            txtSizeFile.setText(size);
         }
     }
 

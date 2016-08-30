@@ -11,7 +11,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:padding="10dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:background="@color/colorSimansu"
         >
@@ -20,14 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Detail Surat Masuk"
+            android:layout_marginLeft="5dp"
             android:textColor="#fff"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             />
         <ImageButton
             android:layout_gravity="right|center_vertical"
             android:layout_width="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_height="match_parent"
             android:id="@+id/btnDisposisi"
-            android:layout_height="wrap_content"
             android:background="@drawable/selector"
             android:padding="5dp"
             android:src="@drawable/ic_description_black_24dp"
@@ -279,16 +280,16 @@
                                 android:layout_width="100dp"
                                 android:textSize="13dp"
                                 />
-                            <RelativeLayout
-                                android:id="@+id/frameLampiran"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:nestedScrollingEnabled="true"
-                                android:minHeight="100dp">
-
-                            </RelativeLayout>
-
                         </TableRow>
+                        <FrameLayout
+                            android:layout_marginLeft="100dp"
+                            android:id="@+id/frameLampiran"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="true"
+                            android:minHeight="50dp">
+
+                        </FrameLayout>
 
                     </TableLayout>
 
@@ -306,8 +307,8 @@
                 android:id="@+id/btnRiwayatDispo"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
                 android:background="@drawable/selector"
                 android:src="@drawable/ic_update_black_24dp"
                 />
