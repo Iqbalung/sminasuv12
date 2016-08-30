@@ -69,7 +69,7 @@ public class DaftarLampiran extends Fragment{
         mRecycleView = (RecyclerView) view.findViewById(R.id.lvDaftarLampiran);
         mRecycleView.setHasFixedSize(true);
         LinearLayoutManager layoutManager
-                = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+                = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         mRecycleView.setLayoutManager(layoutManager);
         getDaftarLampiran();
         mAdapter = new AdapterLampiran(getContext(), data_lampiran, new AdapterLampiran.OnItemClickListener(){

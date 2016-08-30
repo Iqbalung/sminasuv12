@@ -1,5 +1,4 @@
 package traspac.simansuv1;
-
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ public class AdapterLampiran extends RecyclerView.Adapter<AdapterLampiran.ViewHo
         this.listener = listener;
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.daftar_lampiran,null);
@@ -44,7 +42,6 @@ public class AdapterLampiran extends RecyclerView.Adapter<AdapterLampiran.ViewHo
     public int getItemCount() {
         return (null != lampiran ? lampiran.size() : 0);
     }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtFileSize,txtFileName;
         public ViewHolder(View itemView) {
@@ -52,9 +49,7 @@ public class AdapterLampiran extends RecyclerView.Adapter<AdapterLampiran.ViewHo
             /*txtFileSize = (TextView) itemView.findViewById(R.id.txtFileSize);*/
             txtFileName = (TextView) itemView.findViewById(R.id.txtFileName);
         }
-
         public void bind(final Lampiran item, final OnItemClickListener listener) {
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     listener.onItemClick(item);
@@ -65,6 +60,5 @@ public class AdapterLampiran extends RecyclerView.Adapter<AdapterLampiran.ViewHo
 
     public interface OnItemClickListener {
         void onItemClick(Lampiran item);
-
     }
 }
