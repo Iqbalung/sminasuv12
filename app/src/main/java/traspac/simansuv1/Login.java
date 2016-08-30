@@ -1,14 +1,17 @@
 package traspac.simansuv1;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -32,6 +35,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener
     EditText etUsername,etPassword;
     SessionManager session;
     private ProgressDialog pd;
+    TextView etLupa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,16 +44,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
         session = new SessionManager(getApplicationContext());
-        Toast.makeText(getApplicationContext(),
-                "User Login Status: " + session.isLogin(), Toast.LENGTH_LONG)
-                .show();
+
+        if(session.isLogin()==true){
+            Toast.makeText(getApplicationContext(),
+                    "Berhasil Login" , Toast.LENGTH_LONG) .show();
+        }
+        if(session.isLogin()==false){
+            Toast.makeText(getApplicationContext(),
+                    "Loggin Terlebih Dahulu" , Toast.LENGTH_LONG) .show();
+        }
         Config.checkKoneksi(getApplicationContext());
+        session.cekLogin();
+
         btnLogin = (AppCompatButton) findViewById(R.id.btnLogin);
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        etLupa = (TextView) findViewById(R.id.txtLupa);
         btnLogin.setOnClickListener(this);
-        session.cekLogin();
+        etLupa.setOnClickListener(this);
+
     }
 
     @Override
@@ -57,7 +71,22 @@ public class Login extends AppCompatActivity implements View.OnClickListener
     {
         if ( v == btnLogin ) {
             proses_login();
+
         }
+        if (v == etLupa){
+            new AlertDialog.Builder(this)
+                    .setTitle("Perhatian")
+                    .setMessage("Jika anda lupa kata sandi hubungi TU")
+                    .setCancelable(false)
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Whatever...
+                        }
+                    }).create().show();
+        }
+
+
     }
 
     private void proses_login()
