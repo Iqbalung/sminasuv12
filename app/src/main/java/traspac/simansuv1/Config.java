@@ -14,11 +14,6 @@ import android.widget.Toast;
  */
 public class Config {
 
-    /*public static final String URL_PATH = "http://192.168.0.56/android/simansu/service_simansu.php?act=";
-    public static final String URL_LOGIN = URL_PATH+"login";
-    public static final String URL_GET_DATA = URL_PATH+"get_surat_masuk&dari=";
-    public static final String URL_GET_BACA_SURAT = URL_PATH+"baca_surat";
-    public static final String URL_GET_RIWAYAT_DISPOSISI = URL_PATH+"get_riw_surat";*/
 
     //URL
     public static final String URL_PATH = "http://192.168.1.11/mako/sms_mako/index.php/service/";
@@ -27,7 +22,7 @@ public class Config {
     public static final String URL_GET_DATA = URL_PATH+"kotak_masuk?v_userid=";
     public static final String URL_GET_BACA_SURAT = URL_PATH+"lihat_baca_surat";
     public static final String URL_GET_FILE_LAMPIRAN = URL_PATH1+"get_file?surat_id=";
-    public static final String URL_GET_TUJUAN_DISPO = "http://192.168.1.103/android/service_simansu.php?act=get_tujuan_dispo";
+    public static final String URL_GET_TUJUAN_DISPO = URL_PATH1+"get_daftar_tujuan_dispo";
     public static final String URL_GET_TINDAKAN_DISPO = URL_PATH1+"get_tindakan_disposisi";
     public static final String URL_SIMPAN_DISPOSISI = URL_PATH1+"simpan_disposisi";
     public static final String URL_GET_RIWAYAT_DISPOSISI = URL_PATH+"riwayat_disposisi";
@@ -102,13 +97,14 @@ public class Config {
 
 
 
-    public static final void alertView(String title,String pesan, Activity activity)
+    public static final void alertView(String title, String pesan, Activity activity)
     {
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
         dialog.setTitle(title)
                 .setMessage(pesan)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
+
                     }
                 }).show();
     }

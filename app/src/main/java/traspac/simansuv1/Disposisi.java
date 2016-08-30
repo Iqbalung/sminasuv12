@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -142,7 +143,7 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
 
                     @Override
                     public void onResponse(String response) {
-                        Log.d("Data", "Response: "+response);
+                        /*Log.d("Data", "Response: "+response);*/
                         JSONObject json = null;
                         try {
                             json = new JSONObject(response);
@@ -151,14 +152,14 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
                             showDataTindakanDisposisi(result_tindakan_disposisi);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Log.e("Data", "onResponse2: " + e.getMessage());
+                            Log.e("Data", "Tindakan Disposisi 1 " + e.getMessage());
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Data", "onResponse3: " + error.getMessage());
+                        Log.e("Data", "Tindakan Disposisi 1 " + error.getMessage());
                     }
                 }
         );
@@ -190,7 +191,7 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
 
     private void getDataTujuanDisposisi()
     {
-        StringRequest request = new StringRequest(Config.URL_GET_TUJUAN_DISPO,
+        StringRequest request = new StringRequest(Request.Method.POST,Config.URL_GET_TUJUAN_DISPO,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -198,9 +199,11 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
                         try {
                             json = new JSONObject(response);
                             result_tujuan_disposisi = json.getJSONArray(Config.TAG_JSON_ARRAY);
+                            /*Log.d("Data","Data Tujuan Disposisi"+result_tindakan_disposisi);*/
                             showDataTujuanDisposisi(result_tujuan_disposisi);
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Log.e("Data","Tujuan Disposisi 1 "+e.getMessage());
                         }
                     }
                 },
@@ -208,9 +211,17 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+                        Log.e("Data","Tujuan Disposisi 2 "+error.getMessage());
                     }
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String,String> params = new HashMap<>();
+                params.put(Config.TAG_ID_USER,user_id);
+                return params;
+            }
+        };
 
         RequestQueue rq = Volley.newRequestQueue(getApplicationContext());
         rq.add(request);
@@ -298,11 +309,10 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
                                 JSONObject json = new JSONObject(response);
                                 String success = json.getString(Config.LOGIN_SUCCESS);
                                 if (success.equals("true")) {
-                                    Config.alertView("Success", "Simpan disposisi", Disposisi.this);
-                                /*Intent intent = new Intent(getApplicationContext(),MainMenu.class);
-                                startActivity(intent);*/
+                                    Toast.makeText(getApplicationContext(),"Disposisi berhasil disimpan",Toast.LENGTH_SHORT).show();
+                                    finish();
                                 } else {
-                                    Config.alertView("Failed", "Simpan disposisi", Disposisi.this);
+                                    Toast.makeText(getApplicationContext(),"Disposisi berhasil disimpan",Toast.LENGTH_SHORT).show();
                                 }
 
                             } catch (JSONException e) {
