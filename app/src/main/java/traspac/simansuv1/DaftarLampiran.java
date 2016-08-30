@@ -13,12 +13,12 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,18 +38,23 @@ import java.util.ArrayList;
 /**
  * Created by UI-21 on 15/08/2016.
  */
-public class DaftarLampiran extends Fragment implements AdapterView.OnItemClickListener {
+public class DaftarLampiran extends Fragment{
 
     View view;
     private ListView listLampiran;
     private ArrayList<String> lampiran;
+    private ArrayList<Lampiran> data_lampiran;
     JSONObject list_lampiran;
     String  file,stat,path_download,path_folder,daftar_lampiran;
     private ProgressDialog pDialog;
     public static final int progress_bar_type = 0;
+    private RecyclerView mRecycleView;
+    private AdapterLampiran mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
-    @Nullable
-    @Override
+    public DaftarLampiran() {
+    }
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_daftar_lampiran, container, false);
 
@@ -60,13 +65,30 @@ public class DaftarLampiran extends Fragment implements AdapterView.OnItemClickL
         }
 
 
-
-        lampiran = new ArrayList<String>();
-        listLampiran = (ListView) view.findViewById(R.id.lvDaftarLampiran);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.list_data, R.id.txtList, lampiran);
-        listLampiran.setAdapter(adapter);
-        listLampiran.setOnItemClickListener(this);
+        data_lampiran = new ArrayList<Lampiran>();
+        mRecycleView = (RecyclerView) view.findViewById(R.id.lvDaftarLampiran);
+        mRecycleView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        mRecycleView.setLayoutManager(layoutManager);
         getDaftarLampiran();
+        mAdapter = new AdapterLampiran(getContext(), data_lampiran, new AdapterLampiran.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(Lampiran item) {
+
+                file = item.getFileName();
+
+                path_folder = Environment.getExternalStorageDirectory().getPath()+"/Download/";
+                path_download = path_folder+ file;
+
+                new DownloadFileFromURL().execute(Config.URL_PATH+"lampiran/"+file);
+            }
+
+        });
+
+        mRecycleView.setAdapter(mAdapter);
+
         return view;
 
     }
@@ -76,7 +98,7 @@ public class DaftarLampiran extends Fragment implements AdapterView.OnItemClickL
         JSONArray data = null;
         try {
             data = new JSONArray(daftar_lampiran);
-
+            Log.d("Data", "getDaftarLampiran: "+data.toString());
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e("Error",e.getMessage());
@@ -84,26 +106,19 @@ public class DaftarLampiran extends Fragment implements AdapterView.OnItemClickL
 
         for (int i = 0; i < data.length(); i++) {
             String nama_file = null;
+
             try {
                 nama_file = data.getJSONObject(i).getString(Config.TAG_LAMPIRAN_FILE);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            lampiran.add(nama_file);
+            Lampiran item = new Lampiran();
+            item.setFileName(nama_file);
+            data_lampiran.add(item);
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-       file = parent.getItemAtPosition(position).toString();
-        /*Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse(Config.URL_PATH + file));
-        startActivity(intent);*/
-        path_folder = Environment.getExternalStorageDirectory().getPath()+"/Download/";
-        path_download = path_folder+ file;
 
-        new DownloadFileFromURL().execute(Config.URL_PATH+"lampiran/"+file);
-
-    }
 
 
     protected Dialog onCreateDialog(int id) {

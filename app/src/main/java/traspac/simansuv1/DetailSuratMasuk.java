@@ -1,5 +1,6 @@
 package traspac.simansuv1;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -30,6 +31,7 @@ public class DetailSuratMasuk extends AppCompatActivity implements View.OnClickL
     ImageButton btnDisposisi,btnRiwayatDispo;
     android.support.v4.app.FragmentManager fragManager;
     FragmentTransaction fragTransaction;
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class DetailSuratMasuk extends AppCompatActivity implements View.OnClickL
         showDetailSuratMasuk();
         setUpFragment();
         showLampiran();
+
     }
 
 
@@ -93,6 +96,7 @@ public class DetailSuratMasuk extends AppCompatActivity implements View.OnClickL
     }
 
     private void showDetailSuratMasuk() {
+
         txtPengirim.setText(pengirim);
         txtSifat.setText(sifat);
         txtHal.setText(hal);
@@ -136,6 +140,7 @@ public class DetailSuratMasuk extends AppCompatActivity implements View.OnClickL
     }
 
     private void showLampiran() {
+        pd = ProgressDialog.show(DetailSuratMasuk.this,"Proses","Mengambil data...",false,false);
         final StringRequest request = new StringRequest(Request.Method.GET, Config.URL_GET_FILE_LAMPIRAN+surat_id,
                 new Response.Listener<String>() {
                     @Override
@@ -155,13 +160,14 @@ public class DetailSuratMasuk extends AppCompatActivity implements View.OnClickL
                             e.printStackTrace();
                             Log.e("Error", "onResponse: " + e.getMessage());
                         }
-
+                        pd.dismiss();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Error", "onErrorResponse: " + error.getMessage());
+                        pd.dismiss();
                     }
                 }
         ){
@@ -176,5 +182,11 @@ public class DetailSuratMasuk extends AppCompatActivity implements View.OnClickL
 
         RequestQueue rq = Volley.newRequestQueue(getApplicationContext());
         rq.add(request);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        DaftarSuratMasuk.tap = 0;
     }
 }

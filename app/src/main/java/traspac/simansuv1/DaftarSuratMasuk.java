@@ -44,13 +44,14 @@ public class DaftarSuratMasuk extends Fragment implements AdapterView.OnItemClic
     public static String dataLampiran;
     HashMap<String, String> detailSuratMasuk;
     private SessionManager session;
+    static int tap;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.fragment_daftar_surat_masuk,container,false);
-
+        tap = 0;
         lvSuratMasuk = (ListView) view.findViewById(R.id.lvSuratMasuk);
         dataSuratMasuk = new ArrayList<SuratMasuk>();
         detailSuratMasuk = new HashMap<String, String>();
@@ -169,11 +170,13 @@ public class DaftarSuratMasuk extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
+        if (tap == 0) {
+            SuratMasuk data = (SuratMasuk) parent.getItemAtPosition(position);
+            String[] params = {user_id,data.getSurat_id(),data.getJenis_id(),data.getRevisi_id()};
+            getDetailSuratMasuk(params);
+            tap = 1;
+        }
 
-        SuratMasuk data = (SuratMasuk) parent.getItemAtPosition(position);
-        String[] params = {user_id,data.getSurat_id(),data.getJenis_id(),data.getRevisi_id()};
-        getDetailSuratMasuk(params);
-        view.setOnClickListener(null);
 
     }
 
@@ -228,7 +231,6 @@ public class DaftarSuratMasuk extends Fragment implements AdapterView.OnItemClic
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         startActivity(intent);
 
     }

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:textSize="13dp"
     android:layout_height="fill_parent"
+
     android:background="#eee"
     android:orientation="vertical"
     tools:context="traspac.simansuv1.DetailSuratMasuk">
@@ -36,21 +37,22 @@
     </FrameLayout>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:paddingBottom="5dp"
+        android:layout_weight="1"
+        android:nestedScrollingEnabled="true"
         >
         <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="55dp"
-            android:id="@+id/scrollView2" >
-
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView" >
                 <LinearLayout
                     android:orientation="vertical"
                     android:background="#fff"
                     android:padding="5dp"
                     android:layout_margin="6dp"
                     android:layout_width="match_parent"
-                    android:layout_height="370dp"
+                    android:layout_height="match_parent"
                     >
                     <LinearLayout
                         android:id="@+id/layout1"
@@ -281,38 +283,36 @@
                                 android:textSize="13dp"
                                 />
                         </TableRow>
-                        <FrameLayout
-                            android:layout_marginLeft="100dp"
-                            android:id="@+id/frameLampiran"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="true"
-                            android:minHeight="50dp">
-
-                        </FrameLayout>
 
                     </TableLayout>
+                    <RelativeLayout
+                        android:layout_marginLeft="100dp"
+                        android:id="@+id/frameLampiran"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="true"
+                        android:minHeight="50dp">
+                    </RelativeLayout>
 
                 </LinearLayout>
 
         </ScrollView>
-
-        <FrameLayout
-            android:gravity="bottom|center"
-            android:layout_width="match_parent"
-            android:layout_gravity="bottom|center"
-            android:background="#cc000000"
-            android:layout_height="50dp">
-            <ImageButton
-                android:id="@+id/btnRiwayatDispo"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:background="@drawable/selector"
-                android:src="@drawable/ic_update_black_24dp"
-                />
-        </FrameLayout>
+    </FrameLayout>
+    <FrameLayout
+        android:gravity="bottom|center"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom|center"
+        android:background="#cc000000"
+        android:layout_height="50dp">
+        <ImageButton
+            android:id="@+id/btnRiwayatDispo"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="@drawable/selector"
+            android:src="@drawable/ic_update_black_24dp"
+            />
     </FrameLayout>
 
 </LinearLayout>

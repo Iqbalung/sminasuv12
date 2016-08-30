@@ -42,7 +42,7 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
 
     private AutoCompleteTextView txtKepada;
     private TextView pengirim,nosurat,jam,sifat,tanggal,idTindakan,idTujuan,txtNamaFile,txtSizeFile;
-    private String dispengirim,disnosurat,disjam,dissifat,distanggal,kepada,surat_id,remitten,isi;
+    private String dispengirim,disnosurat,disjam,dissifat,distanggal,kepada,surat_id,remitten,isi,user_id;
     private EditText etRemitten,etIsi;
     private JSONArray result_tujuan_disposisi,result_tindakan_disposisi;
     private ArrayList<String> tujuan_disposisi,tindakan_disposisi;
@@ -50,7 +50,7 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
     private DatePickerDialog dateDialog;
     private SimpleDateFormat dateFormat;
     private ImageButton btnSave,btnUpload;
-    private int PICK_IMAGE_REQUEST = 1;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -103,8 +103,10 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
         setRemitten();
 
         cboTindakan.setOnItemSelectedListener(this);
-
         surat_id = "1";
+        session = new SessionManager(getApplicationContext());
+        HashMap<String,String> data_user = session.getDataUser();
+        user_id = data_user.get(Config.TAG_ID_USER);
     }
 
 
@@ -327,19 +329,20 @@ public class Disposisi extends AppCompatActivity implements View.OnClickListener
 
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
+
                     Map<String, String> params = new HashMap<>();
                     params.put(Config.TAG_V_DISPOSISI_ID, "1");
-                    params.put(Config.TAG_V_USER_ID_PEMBUAT, "1");
+                    params.put(Config.TAG_V_USER_ID_PEMBUAT, user_id);
                     params.put(Config.TAG_V_ENTRY_SURAT_ID, surat_id);
                     params.put(Config.TAG_V_KEPADA, kepada);
                     params.put(Config.TAG_V_ISI, isi);
                     params.put(Config.TAG_V_TANGGAL_REMITEN, remitten);
                     params.put(Config.TAG_V_TINDAKAN, cboTindakan.getSelectedItem().toString());
                     params.put(Config.TAG_V_USER_ID_TUJUAN, idTujuan.getText().toString());
-                    params.put(Config.TAG_V_FILE_ORIGINAL, "1");
-                    params.put(Config.TAG_V_FILE_RENAME, "1");
+                    params.put(Config.TAG_V_FILE_ORIGINAL, txtNamaFile.getText().toString());
+                    params.put(Config.TAG_V_FILE_RENAME, txtNamaFile.getText().toString());
                     params.put(Config.TAG_V_FILE_SIZE, "1");
-                    Log.d("Data", params.toString());
+
                     return params;
                 }
 
