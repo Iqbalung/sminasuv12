@@ -21,6 +21,7 @@ public class GCMPushReceiverService extends GcmListenerService {
         sendNotification(message);
     }
     private void sendNotification(String message) {
+
         Intent intent = new Intent(this, DaftarSuratMasuk.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         int requestCode = 0;//Your request code
@@ -31,13 +32,15 @@ public class GCMPushReceiverService extends GcmListenerService {
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         //Build notification
         NotificationCompat.Builder noBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.icon)
+                .setContentTitle("Simansu")
                 .setContentText("My GCM message :X:X")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent);
-        //notification.sound = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.gtm_analytics);
+//
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, noBuilder.build()); //0 = ID of notification
+
     }
 }
