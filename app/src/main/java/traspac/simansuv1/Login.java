@@ -45,6 +45,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener
     TextView etLupa;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private static final String TAG = "myApp";
+    public String oke;
+
 
 
     @Override
