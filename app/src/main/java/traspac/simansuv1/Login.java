@@ -49,6 +49,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -57,6 +58,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+
         try{
             mRegistrationBroadcastReceiver = new BroadcastReceiver() {
                 @Override
@@ -103,10 +105,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener
             Toast.makeText(getApplicationContext(),
                     "Berhasil Login" , Toast.LENGTH_LONG) .show();
         }
-        if(session.isLogin()==false){
-            Toast.makeText(getApplicationContext(),
-                    "Loggin Terlebih Dahulu" , Toast.LENGTH_LONG) .show();
-        }
+//        if(session.isLogin()==false){
+//            Toast.makeText(getApplicationContext(),
+//                    "Loggin Terlebih Dahulu" , Toast.LENGTH_LONG) .show();
+//        }
         Config.checkKoneksi(getApplicationContext());
         session.cekLogin();
 
@@ -149,8 +151,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener
         final String username = etUsername.getText().toString().trim();
         final String password = etPassword.getText().toString().trim();
         pd = ProgressDialog.show(Login.this,"Proses","Mengambil data...",false,false);
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String token = intent.getStringExtra("token");
+
+                Toast.makeText(getApplicationContext(), "GCM token:" + token, Toast.LENGTH_LONG).show();
+                Log.w("myApp",token);
+
+            }
+        };
         StringRequest sr = new StringRequest(Request.Method.POST,Config.URL_LOGIN,
                 new Response.Listener<String>() {
+
+
+
+
 
                     @Override
                     public void onResponse(String response) {
@@ -164,6 +181,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener
                                 Log.d("Data","Data User " + data_user.toString());
                                 session.createSessionLogin(userid,fullname);
                                 Intent intent = new Intent(getApplicationContext(),MainMenu.class);
+
                                 startActivity(intent);
                             }else{
                                 String message = json.getString("message");
@@ -199,6 +217,21 @@ public class Login extends AppCompatActivity implements View.OnClickListener
         RequestQueue rq = Volley.newRequestQueue(Login.this);
         rq.add(sr);
 
+    }
+    protected void onResume() {
+        super.onResume();
+        Log.w("MainActivity", "onResume");
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.w("MainActivity", "onPause");
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
     }
 
 }
